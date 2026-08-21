@@ -1,0 +1,7 @@
+{
+  "name": "VyaparFlow - Sales Order & Dispatch Manager",
+  "description": "Small business order collection, multi-product GST billing, freight calculations, party and product master management, and shipment dispatch tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
