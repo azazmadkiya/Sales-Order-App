@@ -6,22 +6,15 @@ import {
   Eye, 
   EyeOff, 
   AlertCircle, 
-  ArrowRight,
-  CheckCircle2,
-  Building2,
-  FileSpreadsheet,
-  FileText,
-  Truck,
-  Users
+  ArrowRight
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { UserRole } from '../types';
 
 export const LoginPage: React.FC = () => {
   const { loginUser, loading } = useAuth();
   
-  const [username, setUsername] = useState('azazmadkiya');
-  const [password, setPassword] = useState('9687709315');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
@@ -47,23 +40,6 @@ export const LoginPage: React.FC = () => {
 
     if (!result.success && result.error) {
       setErrorMessage(result.error);
-    }
-  };
-
-  const handleQuickRoleFill = (userType: 'admin' | 'creator' | 'dispatch' | 'viewer') => {
-    setErrorMessage('');
-    if (userType === 'admin') {
-      setUsername('azazmadkiya');
-      setPassword('9687709315');
-    } else if (userType === 'creator') {
-      setUsername('sales_user');
-      setPassword('sales123');
-    } else if (userType === 'dispatch') {
-      setUsername('dispatch_user');
-      setPassword('dispatch123');
-    } else if (userType === 'viewer') {
-      setUsername('viewer_user');
-      setPassword('view123');
     }
   };
 
@@ -129,7 +105,7 @@ export const LoginPage: React.FC = () => {
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="e.g. azazmadkiya or sales_user"
+                  placeholder="Enter your Username / Login ID"
                   autoComplete="username"
                   required
                   className="w-full pl-10 pr-3 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-slate-100 placeholder-slate-500 text-sm font-medium focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
@@ -152,7 +128,7 @@ export const LoginPage: React.FC = () => {
                   type={showPassword ? 'text' : 'password'}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••••"
+                  placeholder="Enter your Password / PIN"
                   autoComplete="current-password"
                   required
                   className="w-full pl-10 pr-10 py-2.5 bg-slate-950 border border-slate-700 rounded-xl text-slate-100 placeholder-slate-500 text-sm font-medium focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
@@ -201,79 +177,11 @@ export const LoginPage: React.FC = () => {
             </button>
           </form>
 
-          {/* Quick Role Fill Pills */}
-          <div className="mt-6 pt-5 border-t border-slate-800/80">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">
-              Quick Role Test Logins:
-            </span>
-            <div className="grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => handleQuickRoleFill('admin')}
-                className="p-2 bg-purple-950/40 hover:bg-purple-900/60 border border-purple-800/60 rounded-xl text-left transition-colors"
-              >
-                <div className="flex items-center space-x-1.5 text-purple-300 font-bold text-xs">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>Admin</span>
-                </div>
-                <span className="text-[10px] text-slate-400 block mt-0.5">Full access & users</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleQuickRoleFill('creator')}
-                className="p-2 bg-blue-950/40 hover:bg-blue-900/60 border border-blue-800/60 rounded-xl text-left transition-colors"
-              >
-                <div className="flex items-center space-x-1.5 text-blue-300 font-bold text-xs">
-                  <FileText className="w-3.5 h-3.5" />
-                  <span>Only Add Order</span>
-                </div>
-                <span className="text-[10px] text-slate-400 block mt-0.5">Sales & vouchers</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleQuickRoleFill('dispatch')}
-                className="p-2 bg-amber-950/40 hover:bg-amber-900/60 border border-amber-800/60 rounded-xl text-left transition-colors"
-              >
-                <div className="flex items-center space-x-1.5 text-amber-300 font-bold text-xs">
-                  <Truck className="w-3.5 h-3.5" />
-                  <span>Only Dispatch</span>
-                </div>
-                <span className="text-[10px] text-slate-400 block mt-0.5">Logistics & LR dockets</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => handleQuickRoleFill('viewer')}
-                className="p-2 bg-slate-800/40 hover:bg-slate-800 border border-slate-700 rounded-xl text-left transition-colors"
-              >
-                <div className="flex items-center space-x-1.5 text-slate-300 font-bold text-xs">
-                  <Eye className="w-3.5 h-3.5" />
-                  <span>Only View</span>
-                </div>
-                <span className="text-[10px] text-slate-400 block mt-0.5">Read-only audit</span>
-              </button>
-            </div>
-          </div>
-
           {/* Notice */}
-          <div className="mt-4 text-center">
+          <div className="mt-5 text-center border-t border-slate-800/80 pt-4">
             <p className="text-[11px] text-slate-500 leading-relaxed font-medium">
               🔒 Admin can add team users and grant specific rights inside the portal.
             </p>
-          </div>
-        </div>
-
-        {/* Feature Points Footer */}
-        <div className="mt-6 grid grid-cols-2 gap-3 text-center text-xs text-slate-400">
-          <div className="flex items-center justify-center space-x-1.5 bg-slate-900/50 border border-slate-800/60 py-2 px-3 rounded-lg">
-            <Building2 className="w-3.5 h-3.5 text-blue-400" />
-            <span>GST B2B Billing</span>
-          </div>
-          <div className="flex items-center justify-center space-x-1.5 bg-slate-900/50 border border-slate-800/60 py-2 px-3 rounded-lg">
-            <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-400" />
-            <span>Dispatch Challans</span>
           </div>
         </div>
 
