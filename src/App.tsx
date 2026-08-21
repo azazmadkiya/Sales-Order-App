@@ -12,6 +12,7 @@ import { DispatchModal } from './components/DispatchModal';
 import { InvoicePrintModal } from './components/InvoicePrintModal';
 import { BusinessProfileModal } from './components/BusinessProfileModal';
 import { UserManagementModal } from './components/UserManagementModal';
+import { InstallAppModal } from './components/InstallAppModal';
 import { LoginPage } from './components/LoginPage';
 import { SalesOrder } from './types';
 
@@ -31,6 +32,7 @@ function MainAppContent() {
 
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
   const [isUserManagementOpen, setIsUserManagementOpen] = useState(false);
+  const [isInstallModalOpen, setIsInstallModalOpen] = useState(false);
 
   // Navigation handlers
   const handleAddNewOrder = () => {
@@ -83,6 +85,7 @@ function MainAppContent() {
         onOpenProfile={() => setIsProfileModalOpen(true)}
         onOpenNewOrder={handleAddNewOrder}
         onOpenUserManagement={() => setIsUserManagementOpen(true)}
+        onOpenInstallModal={() => setIsInstallModalOpen(true)}
       />
 
       {/* Main View Container */}
@@ -169,6 +172,12 @@ function MainAppContent() {
       <UserManagementModal
         isOpen={isUserManagementOpen}
         onClose={() => setIsUserManagementOpen(false)}
+      />
+
+      {/* Install Android App / Shortcut Modal */}
+      <InstallAppModal
+        isOpen={isInstallModalOpen}
+        onClose={() => setIsInstallModalOpen(false)}
       />
     </div>
   );
