@@ -6,17 +6,12 @@ import {
   Eye, 
   EyeOff, 
   AlertCircle, 
-  ArrowRight,
-  Smartphone,
-  Download
+  ArrowRight
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { InstallAppModal } from './InstallAppModal';
-import { usePwaInstall } from '../hooks/usePwaInstall';
 
 export const LoginPage: React.FC = () => {
   const { loginUser, loading } = useAuth();
-  const { isInstalled } = usePwaInstall();
   
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -24,7 +19,6 @@ export const LoginPage: React.FC = () => {
   const [rememberMe, setRememberMe] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isInstallModalOpen, setIsInstallModalOpen] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -181,17 +175,6 @@ export const LoginPage: React.FC = () => {
                 </>
               )}
             </button>
-            {/* Install Android App Shortcut Button */}
-            <div className="pt-2">
-              <button
-                type="button"
-                onClick={() => setIsInstallModalOpen(true)}
-                className="w-full py-2.5 px-3 bg-gradient-to-r from-blue-950/80 to-indigo-950/80 hover:from-blue-900 hover:to-indigo-900 border border-blue-700/60 rounded-xl text-blue-200 text-xs font-semibold flex items-center justify-center space-x-2 transition-all active:scale-98 shadow-sm cursor-pointer"
-              >
-                <Smartphone className="w-4 h-4 text-blue-400" />
-                <span>📲 Install & Create Shortcut (Android App)</span>
-              </button>
-            </div>
           </form>
 
           {/* Notice */}
@@ -201,12 +184,6 @@ export const LoginPage: React.FC = () => {
             </p>
           </div>
         </div>
-
-        {/* Install Modal */}
-        <InstallAppModal
-          isOpen={isInstallModalOpen}
-          onClose={() => setIsInstallModalOpen(false)}
-        />
 
         {/* Designer Credits */}
         <div className="mt-6 text-center">
